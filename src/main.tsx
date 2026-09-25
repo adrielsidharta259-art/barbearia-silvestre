@@ -406,7 +406,7 @@ function ClientPanel({ session, plans, refresh, onChanged }: { session: any; pla
         return
       }
       setSubscription(subResult.data)
-      setAppointments((appointmentResult.data || []) as Appointment[])
+      setAppointments((appointmentResult.data || []) as unknown as Appointment[])
       setServices((serviceResult.data || []) as Service[])
       setBarbers((barberResult.data || []) as Barber[])
     }
@@ -527,7 +527,7 @@ function BarberPanel({ session, refresh }: { session: any; refresh: number }) {
       if (barberError) { setMessage('Seu usuário ainda não está vinculado a um cadastro de barbeiro.'); return }
       const { data, error } = await supabase.from('appointments').select('id,appointment_date,appointment_time,amount,kind,notes,services(name),barbers(name)').eq('barber_id', barber.id).order('appointment_date', { ascending: true }).limit(50)
       if (error) setMessage(errorMessage(error))
-      else setAppointments((data || []) as Appointment[])
+      else setAppointments((data || []) as unknown as Appointment[])
     }
     load()
   }, [session.user.id, refresh])
