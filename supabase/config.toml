@@ -1,0 +1,10 @@
+project_id = "YOUR_PROJECT_ID"
+
+[functions.bootstrap-admin]
+verify_jwt = false
+[functions.create-payment]
+verify_jwt = true
+[functions.mercadopago-webhook]
+verify_jwt = false
+[functions.infinitepay-webhook]
+verify_jwt = false
